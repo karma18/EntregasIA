@@ -8,13 +8,12 @@ utilizando especificaciones, planificación, agentes, pruebas y revisión.
 
 ## Estado actual
 
-Ya existe el esqueleto de la solución .NET 10 (`CursoCursor.slnx`):
-un proyecto de API y un proyecto de pruebas. Todavía no hay
-endpoints de catálogo, reserva ni cancelación.
+La solución `CursoCursor.slnx` contiene la API `Talleres.Api` y sus
+pruebas. En esta etapa la API arranca en local, responde su estado
+en `/health` y publica OpenAPI solo en Development.
 
-Las siguientes especificaciones se irán definiendo conforme avancemos.
-No debemos asumir que una funcionalidad existe sin comprobarlo en
-el proyecto.
+Todavía no hay catálogo, reserva ni cancelación. No debemos asumir
+que una funcionalidad existe sin comprobarlo en el proyecto.
 
 ## Qué queremos construir
 
@@ -103,18 +102,30 @@ persistencia en base de datos ni despliegue público.
 Los datos se perderán al reiniciar. El control de concurrencia protegerá
 una sola instancia de la aplicación.
 
-## Cómo comprobar el esqueleto
+## Requisitos y arranque de esta etapa
+
+Se necesita el SDK de .NET 10 (ver `global.json`). No hace falta
+base de datos ni claves de inteligencia artificial.
 
 Desde la raíz del repositorio:
 
 ```text
 dotnet restore CursoCursor.slnx
 dotnet build CursoCursor.slnx --no-restore
-dotnet test CursoCursor.slnx
+dotnet test CursoCursor.slnx --no-build
+dotnet run --project src/Talleres.Api --launch-profile http
 ```
 
-El siguiente paso son las especificaciones de cada funcionalidad,
-no redefinir la visión ni los contratos HTTP de negocio.
+La API responde en `http://localhost:5080`. En Development:
+
+- `GET /health` devuelve `{"status":"ok"}`.
+- `GET /openapi/v1.json` describe esa operación.
+
+En Production, OpenAPI no está publicado. Una ruta inexistente
+responde 404 con ProblemDetails.
+
+Esta etapa no incluye catálogo ni reservas. Esos contratos se
+definirán en especificaciones posteriores.
 
 ## Participación en el curso
 
