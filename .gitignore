@@ -1,0 +1,12 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+.vs/
+[Dd]ebug/
+[Rr]elease/
+*.nupkg
+project.lock.json
+artifacts/

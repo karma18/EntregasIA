@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/CursoCursor.Api/CursoCursor.Api.csproj" />
+  <Project Path="tests/CursoCursor.Api.Tests/CursoCursor.Api.Tests.csproj" />
+</Solution>
