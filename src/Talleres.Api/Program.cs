@@ -1,8 +1,11 @@
+using Talleres.Api.Features.Workshops;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddProblemDetails();
 builder.Services.AddValidation();
 builder.Services.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = false);
+builder.Services.AddSingleton<ReservationStore>();
 
 if (builder.Environment.IsDevelopment())
 {
@@ -20,6 +23,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+app.MapWorkshopEndpoints();
 
 app.Run();
 

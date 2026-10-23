@@ -20,3 +20,4 @@ secrets.json
 .env
 .env.*
 .cursor/mcp.json
+.cursor/hooks/.pending-api-tests
